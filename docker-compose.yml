@@ -1,0 +1,42 @@
+# version: "3.8"
+
+# services:
+#   php:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8080:80"
+#     volumes:
+#       - ./src:/var/www/html
+
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:80" # Map port lokal 8080 ke port 80 di container
+    volumes:
+      - ./src:/var/www/html # Sinkronkan folder src lokal dengan container
+    networks:
+      - app-network
+
+  # db:
+  #   image: mysql:8.0
+  #   container_name: mysql-db
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root_password
+  #     MYSQL_DATABASE: my_database
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: user_password
+  #   ports:
+  #     - "3306:3306" # Map port lokal 3306 ke container
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge
